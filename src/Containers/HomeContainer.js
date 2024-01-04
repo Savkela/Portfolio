@@ -1,79 +1,66 @@
-import React, { useRef, useEffect } from 'react';
-import '../Styles/Components/HomeContainer.scss'; // Prilagodite putanju do vašeg CSS fajla
+import React from 'react';
+import Background from '../Components/Background.js';
+import '../Styles/Components/HomeContainer.scss';
 
-const HomeContainer = () => {
-    const homeContainerRef = useRef(null);
-    const fePointLightRef = useRef(null);
-
-    useEffect(() => {
-        const homeContainerNode = homeContainerRef.current;
-        const fePointLightNode = fePointLightRef.current;
-
-        if (!homeContainerNode || !fePointLightNode) {
-            // Provera da li su reference postavljene pre nego što pristupimo svojstvima
-            return;
-        }
-
-        const handleMove = (event) => {
-            fePointLightNode.setAttribute('x', event.clientX);
-            fePointLightNode.setAttribute('y', event.clientY);
-        };
-
-        homeContainerNode.addEventListener('mousemove', handleMove);
-        homeContainerNode.addEventListener('touchmove', handleMove);
-
-        return () => {
-            homeContainerNode.removeEventListener('mousemove', handleMove);
-            homeContainerNode.removeEventListener('touchmove', handleMove);
-        };
-    }, [homeContainerRef, fePointLightRef]);
-
+export default function HomeContainer() {
     return (
-        <div className="home-container" ref={homeContainerRef}>
-            <svg
-                width="100%"
-                height="100vh" // Postavi visinu na 100vh
-                xmlns="http://www.w3.org/2000/svg"
-                xmlnsXlink="http://www.w3.org/1999/xlink"
-            >
-                <filter id="light">
-                    <feGaussianBlur stdDeviation="3" result="blurred"></feGaussianBlur>
-                    <feColorMatrix in="blurred" type="luminanceToAlpha" result="bumpMap"></feColorMatrix>
-                    <feDiffuseLighting in="bumpMap" surfaceScale="3" result="light">
-                        <fePointLight ref={fePointLightRef} x="225" y="150" z="30"></fePointLight>
-                    </feDiffuseLighting>
-                    <feComposite
-                        in="light"
-                        in2="SourceGraphic"
-                        operator="arithmetic"
-                        k1="1" k2="0" k3="0" k4="0"
-                    ></feComposite>
-                </filter>
-                <pattern
-                    id="pattern1"
-                    width="100%"
-                    height="100%"
-                    patternUnits="userSpaceOnUse"
-                >
-                    <image
-                        xlinkHref="https://images.unsplash.com/photo-1527443154391-507e9dc6c5cc?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        width="100%"
-                        height="100%"
-                    ></image>
-                </pattern>
-                <rect
-                    width="100%"
-                    height="100%"
-                    fill="url(#pattern1)"
-                    filter="url(#light)"
-                ></rect>
+        <div>
+            <Background />
+            <div style={{ position: 'absolute', top: '15%', left: '20%', transform: 'translate(-50%, -50%)', zIndex: '1' }}>
+                <h1 style={{ color: 'white', textAlign: 'center' }}>Education:</h1>
 
-            </svg>
-            <div className="text-overlay">
-                <p>Your text goes here</p>
+                <p style={{ color: 'white', textAlign: 'center' }}>FACULTY OF TECHNICAL SCIENCES NOVI SAD <br></br>Applied software engineering at the electrical department</p>
+
+                <p style={{ color: 'white', textAlign: 'center' }}>FACULTY OF TECHNICAL SCIENCES NOVI SAD  <br />  Bachelor with honours in information engineering/data science <br />  at electrical department</p>
+
+
+                <p style={{ color: 'white', textAlign: 'center' }}>ELECTROTECHNICAL SCHOOL "NIKOLA TESLA" KRALJEVO <br></br> Studied information technology</p>
+            </div>
+
+
+
+            <div style={{ position: 'absolute', top: '18%', right: '0%', transform: 'translate(-50%, -50%)', zIndex: '1' }}>
+                <h1 style={{ color: 'white', textAlign: 'center' }}>Professional Experience:</h1>
+
+                <p style={{ color: 'white', textAlign: 'center' }}>January 2023 - July 2023 <br></br>
+                    Fullstack software developer at RationaleTech</p>
+                <p style={{ color: 'white', textAlign: 'center' }}>Applied software engineering at the electrical department</p>
+
+                <p style={{ color: 'white', textAlign: 'center' }}>December 2021 - November 2022 <br></br>
+                    Fullstack software developer at Lionize</p>
+                <p style={{ color: 'white', textAlign: 'center' }}>
+                    November 2021 - December 2021
+                    <br />
+                    Backend software developer internship at LEVI9
+                </p>
+
+                <p style={{ color: 'white', textAlign: 'center' }}>
+                    March 2021 - April 2021
+                    <br />
+                    Fullstack software developer internship at VEGA IT
+                </p>
+
+
+            </div>
+
+            <div style={{ position: 'absolute', bottom: '10%', right: '5%', transform: 'translate(-50%, -50%)', zIndex: '1' }}>
+                <h1 style={{ color: 'white', textAlign: 'center' }}>Hi, I am Nikola</h1>
+                <p style={{ color: 'white', textAlign: 'center' }}>Scroll down to get to know me!</p>
+            </div>
+
+            <div style={{ position: 'absolute', bottom: '10%', left: '25%', transform: 'translate(-50%, -50%)', zIndex: '1' }}>
+                <h1 style={{ color: 'white', textAlign: 'center' }}>Hi, I am Nikola</h1>
+                <p style={{ color: 'white', textAlign: 'center' }}>Scroll down to get to know me!</p>
+            </div>
+
+
+            <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: '1' }}>
+                <h1 style={{ color: 'white', textAlign: 'center' }}>Hi, I am Nikola</h1>
+                <p style={{ color: 'white', textAlign: 'center' }}>I'm a motivated Full Stack Engineer with expertise in various
+                    languages, databases, and frameworks. Passionate about
+                    problem-solving and delivering high-quality projects on
+                    time. Strong at collaboration and adaptable.</p>
             </div>
         </div>
     );
-};
-
-export default HomeContainer;
+}
